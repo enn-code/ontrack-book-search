@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import BookList from "./bookList";
 import Pagination from "./pagination";
 import { postRequest } from "../utils/requests";
 
-const Results = ({ searchTerm }) => {
+const Results = ({ searchTerm, page, setPage, history }) => {
   const [books, setBooks] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     console.log(books);
@@ -16,6 +16,7 @@ const Results = ({ searchTerm }) => {
       (res) => {
         setBooks(res.books);
         setTotalResults(res.count);
+        history.push(`/${searchTerm}?page=${page}`);
       }
     );
   }, [searchTerm, page]);
@@ -30,6 +31,7 @@ const Results = ({ searchTerm }) => {
           <BookList books={books} />
           <Pagination
             totalResults={totalResults}
+            searchTerm={searchTerm}
             page={page}
             setPage={setPage}
           />
@@ -41,4 +43,4 @@ const Results = ({ searchTerm }) => {
   );
 };
 
-export default Results;
+export default withRouter(Results);
