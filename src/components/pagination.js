@@ -1,20 +1,22 @@
 import React from "react";
 
-const Pagination = ({ page, setPage }) => {
+const Pagination = ({ totalResults, page, setPage }) => {
   return (
     <div>
-      <span
-        onClick={() => {
-          const updatedPageNumber = page - 1;
-          if (updatedPageNumber > 0) {
+      {page > 1 && (
+        <span
+          onClick={() => {
             setPage(page - 1);
-          }
-        }}
-      >
-        -
-      </span>
+          }}
+        >
+          -
+        </span>
+      )}
       <span>{page}</span>
-      <span onClick={() => setPage(page + 1)}>+</span>
+      {/* only add plus if there are more results to display */}
+      {totalResults > page * 20 && (
+        <span onClick={() => setPage(page + 1)}>+</span>
+      )}
     </div>
   );
 };

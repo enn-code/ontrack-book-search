@@ -28,7 +28,11 @@ const Results = ({ searchTerm }) => {
             <b>returned {totalResults} results!</b>
           </p>
           <BookList books={books} />
-          <Pagination page={page} setPage={setPage} />
+          <Pagination
+            totalResults={totalResults}
+            page={page}
+            setPage={setPage}
+          />
         </div>
       ) : (
         <div>No results!</div>
