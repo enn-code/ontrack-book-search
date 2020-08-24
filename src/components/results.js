@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BookList from "./bookList";
+import Pagination from "./pagination";
 import { postRequest } from "../utils/requests";
 
 const Results = ({ searchTerm }) => {
@@ -17,14 +18,17 @@ const Results = ({ searchTerm }) => {
         setTotalResults(res.count);
       }
     );
-  }, [searchTerm]);
+  }, [searchTerm, page]);
 
   return (
     <div>
       {books.length > 0 ? (
         <div>
-          <p>returned {totalResults} results! </p>
+          <p>
+            <b>returned {totalResults} results!</b>
+          </p>
           <BookList books={books} />
+          <Pagination page={page} setPage={setPage} />
         </div>
       ) : (
         <div>No results!</div>

@@ -5,17 +5,40 @@ const BookList = ({ books }) => {
   return books.map((book) => {
     return (
       <ul>
-        <li>{book.book_pages}</li>
         <li>
-          {book.book_author.map((author) => (
-            <p>{author}</p>
-          ))}
+          <b>Title: </b>
+          {book.book_title}
         </li>
-        <li>{book.book_publication_city}</li>
-        <li>{book.book_publication_country}</li>
-        <li>{book.book_publication_year}</li>
-        <li>{book.book_title}</li>
-        <li>{book.id}</li>
+        <li>
+          <b>Author(s): </b>
+          {book.book_author.map((author, index) => {
+            if (
+              book.book_author.length > 1 &&
+              book.book_author.length !== index + 1
+            ) {
+              return <span>{author}, </span>;
+            }
+            return <span>{author}</span>;
+          })}
+        </li>
+        <li>
+          <b>Year: </b>
+          {book.book_publication_year}
+        </li>
+        <li>
+          <b>Number of pages: </b>
+          {book.book_pages}
+        </li>
+        <li>
+          <b>Country:</b> {book.book_publication_country}
+        </li>
+        <li>
+          <b>City:</b> {book.book_publication_city}
+        </li>
+        <li>
+          <b>Book ID: </b>
+          {book.id}
+        </li>
       </ul>
     );
   });
