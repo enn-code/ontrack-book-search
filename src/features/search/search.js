@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 import SearchBar from "./searchBar";
-import Results from "./results";
+import Results from "../results/results";
 
 const Search = ({ location }) => {
   const queryParams = queryString.parse(location.search);
